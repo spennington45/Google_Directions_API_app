@@ -1,13 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>title</title>
+    <meta charset="UTF-8" />
+    <title>HELP</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- STYLES -->
+    <style>
+      #map {
+        height: 50%;
+        border: 4px solid pink;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
+
+  <!-- BODY -->
+
   <body>
-    <div class="">
-      <h1>IT MATTERS</h1>
+    <div class="container text-center">
+      <div>
+        GOOGLE MAPS LOL
+      </div>
     </div>
-    <script async defer src="keys/keys.txt" type="text/javascript">Google maps</script>
+    <div class="container" id="map"></div>
   </body>
+
+  <!-- SCRIPT -->
+  <script
+    defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChA0ymHjaxqGEZmdFNcj5G9KPETN_A9qA&callback=initMap"
+  ></script>
+
+  <script>
+    let map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+      });
+    }
+  </script>
 </html>
