@@ -26,25 +26,96 @@
 
   <body>
     <div class="container text-center">
-      <div>
-        GOOGLE MAPS LOL
-      </div>
+      <div>GOOGLE MAPS LOL</div>
+      <form>
+        <input type="text" placeholder="address" />
+        <input type="submit" value="Submit" name="userAddress" />
+        <span> OR </span>
+      </form>
+      <button id="getMyLocation" value="Get my Location" name="userAddress">
+        HELLO BUTTON
+      </button>
     </div>
     <div class="container" id="map"></div>
   </body>
 
-  <!-- SCRIPT -->
+  <!-- SCRIPTS -->
   <script
     defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChA0ymHjaxqGEZmdFNcj5G9KPETN_A9qA&callback=initMap"
   ></script>
 
-  <script>
-    let map;
+  <!-- <script>
+    var map, infoWindow;
+    var getMyLocation = document.getElementById("getMyLocation");
+    getMyLocation.addEventListener("click", initMap());
+
     function initMap() {
       map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
+        zoom: 6,
+      });
+      infoWindow = new google.maps.InfoWindow();
+
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent("Location found.");
+            infoWindow.open(map);
+            map.setCenter(pos);
+          },
+          function () {
+            handleLocationError(true, infoWindow, map.getCenter());
+          }
+        );
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      infoWindow.setPosition(pos);
+      infoWindow.setContent(
+        browserHasGeolocation
+          ? "Error: The Geolocation service failed."
+          : "Error: Your browser doesn't support geolocation."
+      );
+      infoWindow.open(map);
+    }
+  </script> -->
+
+  <script>
+    let map;
+    function initMap() {
+      var Detroit = { lat: 42.365067, lng: -83.073029 };
+      var Cincinnati = { lat: 39.152403, lng: -84.467468 };
+      var Columbus = { lat: 39.997643, lng: -83.042131 };
+      var Cleveland = { lat: 41.503373, lng: -81.639054 };
+      var Pittsburgh = { lat: 40.455173, lng: -80.019006 };
+      // The map, centered at Uluru
+      var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 4,
+        center: Detroit,
+      });
+      // The marker, positioned at Uluru
+      var Detroit = new google.maps.Marker({ position: Detroit, map: map });
+      var Cincinnati = new google.maps.Marker({
+        position: Cincinnati,
+        map: map,
+      });
+      var Columbus = new google.maps.Marker({ position: Columbus, map: map });
+      var Cleveland = new google.maps.Marker({ position: Cleveland, map: map });
+      var Pittsburgh = new google.maps.Marker({
+        position: Pittsburgh,
+        map: map,
       });
     }
   </script>
