@@ -93,29 +93,36 @@
   </script> -->
 
   <script>
-    let map;
     function initMap() {
-      var Detroit = { lat: 42.365067, lng: -83.073029 };
-      var Cincinnati = { lat: 39.152403, lng: -84.467468 };
-      var Columbus = { lat: 39.997643, lng: -83.042131 };
-      var Cleveland = { lat: 41.503373, lng: -81.639054 };
-      var Pittsburgh = { lat: 40.455173, lng: -80.019006 };
-      // The map, centered at Uluru
+      var TEmap = new Map();
+      var keys = ["DET", "CIN", "CBUS", "CLE", "PIT"];
+      var values = [
+        { lat: 42.365067, lng: -83.073029 },
+        { lat: 39.152403, lng: -84.467468 },
+        { lat: 39.997643, lng: -83.042131 },
+        { lat: 41.503373, lng: -81.639054 },
+        { lat: 40.455173, lng: -80.019006 },
+      ];
+
+      for (var i = 0; i < keys.length; i++) {
+        TEmap.set(keys[i], values[i]);
+      }
+
+      // Initialize Map
+
       var map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 4,
-        center: Detroit,
+        zoom: 6,
+        center: TEmap.get(keys[2]),
       });
-      // The marker, positioned at Uluru
-      var Detroit = new google.maps.Marker({ position: Detroit, map: map });
-      var Cincinnati = new google.maps.Marker({
-        position: Cincinnati,
-        map: map,
-      });
-      var Columbus = new google.maps.Marker({ position: Columbus, map: map });
-      var Cleveland = new google.maps.Marker({ position: Cleveland, map: map });
-      var Pittsburgh = new google.maps.Marker({
-        position: Pittsburgh,
-        map: map,
+
+      //Markers
+      keys.forEach(function (holder) {
+        new google.maps.Marker({
+          position: TEmap.get(holder),
+          map: map,
+          label: holder,
+          icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+        });
       });
     }
   </script>
